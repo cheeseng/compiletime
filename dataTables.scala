@@ -381,44 +381,6 @@ if (scalaVersion != "unknown") {
     fileSizeFile.flush()
   }
 
-  // Specs2 mutable
-  durationFile.write("specs2.mutable.Specification")
-  durationFile.flush()
-  fileCountFile.write("specs2.mutable.Specification")
-  fileCountFile.flush()
-  fileSizeFile.write("specs2.mutable.Specification")
-  fileSizeFile.flush()
-  try {
-    testCounts.foreach { testCount =>
-      println("Working on specs2.mutable.Specification test count " + testCount + "...")
-      val outputDir = getOutputDir(baseOutputDir, testCount)
-      val generatedDir = new File(baseGeneratedDir, "generated-" + testCount)
-
-      val generatedSrc = generateSpecs2Mutable(testCount, new File(generatedDir, "mSpecification"))
-      val duration = compile(generatedSrc.getAbsolutePath, specs2Classpath, outputDir.getAbsolutePath)
-      durationFile.write("," + duration)
-      durationFile.flush()
-
-      val (fileCount, fileSize) = getFileAndByteCount(new File(outputDir, "mSpecification"))
-      fileCountFile.write("," + fileCount)
-      fileCountFile.flush()
-      fileSizeFile.write("," + fileSize)
-      fileSizeFile.flush()
-    }
-  }
-  catch {
-    case e: Throwable => 
-      e.printStackTrace()
-  }
-  finally {
-    durationFile.write("\n")
-    durationFile.flush()
-    fileCountFile.write("\n")
-    fileCountFile.flush()
-    fileSizeFile.write("\n")
-    fileSizeFile.flush()
-  }
-
   // Shapeless Table
   durationFile.write("shapeless")
   durationFile.flush()
@@ -447,6 +409,44 @@ if (scalaVersion != "unknown") {
   }
   catch {
     case e: Throwable =>
+      e.printStackTrace()
+  }
+  finally {
+    durationFile.write("\n")
+    durationFile.flush()
+    fileCountFile.write("\n")
+    fileCountFile.flush()
+    fileSizeFile.write("\n")
+    fileSizeFile.flush()
+  }
+
+  // Specs2 mutable
+  durationFile.write("specs2.mutable.Specification")
+  durationFile.flush()
+  fileCountFile.write("specs2.mutable.Specification")
+  fileCountFile.flush()
+  fileSizeFile.write("specs2.mutable.Specification")
+  fileSizeFile.flush()
+  try {
+    testCounts.foreach { testCount =>
+      println("Working on specs2.mutable.Specification test count " + testCount + "...")
+      val outputDir = getOutputDir(baseOutputDir, testCount)
+      val generatedDir = new File(baseGeneratedDir, "generated-" + testCount)
+
+      val generatedSrc = generateSpecs2Mutable(testCount, new File(generatedDir, "mSpecification"))
+      val duration = compile(generatedSrc.getAbsolutePath, specs2Classpath, outputDir.getAbsolutePath)
+      durationFile.write("," + duration)
+      durationFile.flush()
+
+      val (fileCount, fileSize) = getFileAndByteCount(new File(outputDir, "mSpecification"))
+      fileCountFile.write("," + fileCount)
+      fileCountFile.flush()
+      fileSizeFile.write("," + fileSize)
+      fileSizeFile.flush()
+    }
+  }
+  catch {
+    case e: Throwable => 
       e.printStackTrace()
   }
   finally {
