@@ -59,12 +59,12 @@ def generateSourceFile(testCount: Int, targetDir: File): File = {
   val targetOut = new BufferedWriter(new FileWriter(targetFile))
   
   try {
-    targetOut.write("package WordSpecMust\n\n")
+    targetOut.write("package WordSpec\n\n")
     
     targetOut.write("import org.scalatest._\n")
     targetOut.write("import prop.TableDrivenPropertyChecks._\n\n")
     
-    targetOut.write("class ExampleSpec extends WordSpec with Matchers {\n\n")
+    targetOut.write("class ExampleSpec extends UnitSpec {\n\n")
     
     targetOut.write("  \"Scala\" can {\n")
     targetOut.write("    \"increment integers\" in {\n\n")
@@ -111,7 +111,7 @@ def generateShapelessSourceFile(testCount: Int, targetDir: File): File = {
     targetOut.write("import shapeless.TableChecker._\n")
     targetOut.write("import shapelessTable._\n\n")
 
-    targetOut.write("class ExampleSpec extends WordSpec with Matchers {\n\n")
+    targetOut.write("class ExampleSpec extends UnitSpec {\n\n")
 
     targetOut.write("  \"Scala\" can {\n")
     targetOut.write("    \"increment integers\" in {\n\n")
@@ -288,12 +288,21 @@ if (scalaVersion != "unknown") {
     deleteDir(baseDir)
 
   val shapelessTableJar = new File("shapeless-table.jar")
-  if (!shapelessTableJar.exists) {
+  if (!shapelessTableJar.exists || shapelessTableJar.lastModified < new File("ShapelessTable.scala").lastModified) {
     val shapelessTableSource = new File("ShapelessTable.scala")
     val shapelessTableClassDir = new File(baseDir, "shapeless-table")
     shapelessTableClassDir.mkdirs()
     compile(shapelessTableSource.getAbsolutePath, shapelessJar.getName, shapelessTableClassDir.getAbsolutePath)
     jar(shapelessTableJar.getName, shapelessTableClassDir.getAbsolutePath)
+  }
+
+  val scalatestClassJar = new File("scalatest-class.jar")
+  if (!scalatestClassJar.exists || scalatestClassJar.lastModified < new File("scalatest-class.scala").lastModified) {
+    val scalatestClassSource = new File("scalatest-class.scala")
+    val scalatestClassDir = new File(baseDir, "scalatest-class")
+    scalatestClassDir.mkdirs()
+    compile(scalatestClassSource.getAbsolutePath, scalatestJar.getName, scalatestClassDir.getAbsolutePath)
+    jar(scalatestClassJar.getName, scalatestClassDir.getAbsolutePath)
   }
     
   val statDir = new File(baseDir, "stat")
@@ -303,11 +312,11 @@ if (scalaVersion != "unknown") {
   val fileCountFile = new FileWriter(new File(statDir, "filecount.csv"))
   val fileSizeFile = new FileWriter(new File(statDir, "filesize.csv"))
 
-  val scalaTestClasspath = scalatestJar.getName
+  val scalaTestClasspath = scalatestJar.getName + File.pathSeparator + scalatestClassJar.getName
 
   val specs2Classpath = specs2Jar.getName + File.pathSeparator + specs2ScalazJar.getName
 
-  val shapelessClasspath = scalatestJar.getName + File.pathSeparator + shapelessJar.getName + File.pathSeparator + shapelessTableJar.getName
+  val shapelessClasspath = scalaTestClasspath + File.pathSeparator + shapelessJar.getName + File.pathSeparator + shapelessTableJar.getName
 
   val baseOutputDir = new File(baseDir, "output")
   baseOutputDir.mkdirs()
@@ -356,12 +365,12 @@ if (scalaVersion != "unknown") {
       val outputDir = getOutputDir(baseOutputDir, testCount)
       val generatedDir = new File(baseGeneratedDir, "generated-" + testCount)
       
-      val generatedSrc = generateSourceFile(testCount, new File(generatedDir, "WordSpecMust"))
+      val generatedSrc = generateSourceFile(testCount, new File(generatedDir, "WordSpec"))
       val duration = compile(generatedSrc.getAbsolutePath, scalaTestClasspath, outputDir.getAbsolutePath)
       durationFile.write("," + duration)
       durationFile.flush()
 
-      val (fileCount, fileSize) = getFileAndByteCount(new File(outputDir, "WordSpecMust"))
+      val (fileCount, fileSize) = getFileAndByteCount(new File(outputDir, "WordSpec"))
       fileCountFile.write("," + fileCount)
       fileCountFile.flush()
       fileSizeFile.write("," + fileSize)
