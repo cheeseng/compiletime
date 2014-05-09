@@ -208,9 +208,9 @@ val scalatestJar = new File("scalatest_" + scalaVersion + "-" + scalaTestVersion
 if (!scalatestJar.exists)
   downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest_" + scalaVersion + "/" + scalaTestVersion + "/scalatest_" + scalaVersion + "-" + scalaTestVersion + ".jar", scalatestJar)
 
-val shapelessJar = new File("shapeless_2.10.2-2.0.0-SNAPSHOT.jar")
+val shapelessJar = new File("shapeless_2.10.2-2.0.0.jar")
 if (!shapelessJar.exists)
-  downloadFile("http://oss.sonatype.org/content/repositories/snapshots/com/chuusai/shapeless_2.10.2/2.0.0-SNAPSHOT/shapeless_2.10.2-2.0.0-SNAPSHOT.jar", shapelessJar)
+  downloadFile("http://oss.sonatype.org/content/repositories/releases/com/chuusai/shapeless_2.10.2/2.0.0/shapeless_2.10.2-2.0.0.jar", shapelessJar)
 
 val baseDir = new File("shapelessTables")
 if (baseDir.exists)
