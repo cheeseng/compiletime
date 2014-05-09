@@ -4,8 +4,8 @@ import java.nio.channels.Channels
 import scala.annotation.tailrec
 
 def scalaVersion = "2.10"
-val scalautilsVersion = "2.0"
-val scalazVersion = "7.0.4"
+val scalautilsVersion = "2.1.6"
+val scalazVersion = "7.0.6"
 
 def downloadFile(urlString: String, targetFile: File) {
   println("Downloading " + urlString)

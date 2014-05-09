@@ -13,12 +13,12 @@ import scala.math.pow
 }*/
 
 def scalaVersion = "2.10"
-val scalaTestVersion = "2.0"
+val scalaTestVersion = "2.1.6"
 val junitVersion = "4.11"  // JUnit depends on hamcrestVersion
 val hamcrestVersion = "1.3"
-val testngVersion = "6.8"
-val specs2Version = "2.3.4"
-val scalazVersion = "7.0.4"
+val testngVersion = "6.8.8"
+val specs2Version = "2.3.11"
+val scalazVersion = "7.0.6"
 
 def downloadFile(urlString: String, targetFile: File) {
   println("Downloading " + urlString)
