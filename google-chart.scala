@@ -135,72 +135,142 @@ def generateChartFile(srcDir: File, targetFile: File, whichChart: WhichChart = B
   println("Generated " + targetFile.getAbsolutePath)
 }
 
-val allTestsInOneFileDir = new File("allTestsInOneFile")
-val allTestsInOneFileStatDir = new File(allTestsInOneFileDir, "stat")
-if (allTestsInOneFileStatDir.exists) 
-  generateChartFile(allTestsInOneFileStatDir, new File(allTestsInOneFileDir, "allTestsInOneFile-graph.html"))
+val allTestsInOneFile210Dir = new File("target/2.10/allTestsInOneFile")
+val allTestsInOneFile210StatDir = new File(allTestsInOneFile210Dir, "stat")
+if (allTestsInOneFile210StatDir.exists) 
+  generateChartFile(allTestsInOneFile210StatDir, new File(allTestsInOneFile210Dir, "allTestsInOneFile-graph.html"))
 else
-  println("allTestsInOneFile/stat directory does not exist, allTestsInOneFile/allTestsInOneFile-graph.html will not be generated.")
-  
-val tenTestsPerFileDir = new File("tenTestsPerFile")
-val tenTestsPerFileStatDir = new File(tenTestsPerFileDir, "stat")
-if (tenTestsPerFileStatDir.exists)
-  generateChartFile(tenTestsPerFileStatDir, new File(tenTestsPerFileDir, "tenTestsPerFile-graph.html"))
-else
-  println("tenTestsPerFile/stat directory does not exist, tenTestsPerFile/tenTestsPerFile-graph.html will not be generated.")
-  
-val testsIn100FilesDir = new File("testsIn100Files")
-val testsIn100FilesStatDir = new File(testsIn100FilesDir, "stat")
-if (testsIn100FilesStatDir.exists)
-  generateChartFile(testsIn100FilesStatDir, new File(testsIn100FilesDir, "testsIn100Files-graph.html"), FirstChart)
-else
-  println("testsIn100Files/stat directory does not exist, testsIn100Files/tenTestsPerFile-graph.html will not be generated.")
+  println("target/2.10/allTestsInOneFile/stat directory does not exist, target/2.10/allTestsInOneFile/allTestsInOneFile-graph.html will not be generated.")
 
-val dataTablesDir = new File("dataTables")
-val dataTablesStatDir = new File(dataTablesDir, "stat")
-if (dataTablesStatDir.exists)
-  generateChartFile(dataTablesStatDir, new File(dataTablesDir, "dataTables-graph.html"))
+val allTestsInOneFile211Dir = new File("target/2.11/allTestsInOneFile")
+val allTestsInOneFile211StatDir = new File(allTestsInOneFile211Dir, "stat")
+if (allTestsInOneFile211StatDir.exists) 
+  generateChartFile(allTestsInOneFile211StatDir, new File(allTestsInOneFile211Dir, "allTestsInOneFile-graph.html"))
 else
-  println("dataTables/stat directory does not exist, dataTables/dataTables-graph.html will not be generated.")
+  println("target/2.11/allTestsInOneFile/stat directory does not exist, target/2.11/allTestsInOneFile/allTestsInOneFile-graph.html will not be generated.")
   
-val allMethodTestsInOneFileDir = new File("allMethodTestsInOneFile")
-val allMethodTestsInOneFileStatDir = new File(allMethodTestsInOneFileDir, "stat")
-if (allMethodTestsInOneFileStatDir.exists)
-  generateChartFile(allMethodTestsInOneFileStatDir, new File(allMethodTestsInOneFileDir, "allMethodTestsInOneFile-graph.html"), SecondChart)
+val tenTestsPerFile210Dir = new File("target/2.10/tenTestsPerFile")
+val tenTestsPerFile210StatDir = new File(tenTestsPerFile210Dir, "stat")
+if (tenTestsPerFile210StatDir.exists)
+  generateChartFile(tenTestsPerFile210StatDir, new File(tenTestsPerFile210Dir, "tenTestsPerFile-graph.html"))
 else
-  println("allMethodTestsInOneFile/stat directory does not exist, allMethodTestsInOneFile/allMethodTestsInOneFile-graph.html will not be generated.")
+  println("target/2.10/tenTestsPerFile/stat directory does not exist, target/2.10/tenTestsPerFile/tenTestsPerFile-graph.html will not be generated.")
+
+val tenTestsPerFile211Dir = new File("target/2.11/tenTestsPerFile")
+val tenTestsPerFile211StatDir = new File(tenTestsPerFile211Dir, "stat")
+if (tenTestsPerFile211StatDir.exists)
+  generateChartFile(tenTestsPerFile211StatDir, new File(tenTestsPerFile211Dir, "tenTestsPerFile-graph.html"))
+else
+  println("target/2.11/tenTestsPerFile/stat directory does not exist, target/2.11/tenTestsPerFile/tenTestsPerFile-graph.html will not be generated.")
   
-val assertTestsInOneFileDir = new File("assertTestsInOneFile")
-val assertTestsInOneFileStatDir = new File(assertTestsInOneFileDir, "stat")
-if (assertTestsInOneFileStatDir.exists)
-  generateChartFile(assertTestsInOneFileStatDir, new File(assertTestsInOneFileDir, "assertTestsInOneFile-graph.html"))
+val testsIn100Files210Dir = new File("target/2.10/testsIn100Files")
+val testsIn100Files210StatDir = new File(testsIn100Files210Dir, "stat")
+if (testsIn100Files210StatDir.exists)
+  generateChartFile(testsIn100Files210StatDir, new File(testsIn100Files210Dir, "testsIn100Files-graph.html"), FirstChart)
 else
-  println("assertTestsInOneFile/stat directory does not exist, assertTestsInOneFile/assertTestsInOneFile-graph.html will not be generated.")
+  println("target/2.10/testsIn100Files/stat directory does not exist, target/2.10/testsIn100Files/tenTestsPerFile-graph.html will not be generated.")
+
+val testsIn100Files211Dir = new File("target/2.11/testsIn100Files")
+val testsIn100Files211StatDir = new File(testsIn100Files211Dir, "stat")
+if (testsIn100Files211StatDir.exists)
+  generateChartFile(testsIn100Files211StatDir, new File(testsIn100Files211Dir, "testsIn100Files-graph.html"), FirstChart)
+else
+  println("target/2.11/testsIn100Files/stat directory does not exist, target/2.11/testsIn100Files/tenTestsPerFile-graph.html will not be generated.")
+
+val dataTables210Dir = new File("target/2.10/dataTables")
+val dataTables210StatDir = new File(dataTables210Dir, "stat")
+if (dataTables210StatDir.exists)
+  generateChartFile(dataTables210StatDir, new File(dataTables210Dir, "dataTables-graph.html"))
+else
+  println("target/2.10/dataTables/stat directory does not exist, target/2.10/dataTables/dataTables-graph.html will not be generated.")
+
+val dataTables211Dir = new File("target/2.11/dataTables")
+val dataTables211StatDir = new File(dataTables211Dir, "stat")
+if (dataTables211StatDir.exists)
+  generateChartFile(dataTables211StatDir, new File(dataTables211Dir, "dataTables-graph.html"))
+else
+  println("target/2.11/dataTables/stat directory does not exist, target/2.11/dataTables/dataTables-graph.html will not be generated.")
   
-val allClassTestsInOneFileDir = new File("allClassTestsInOneFile")
-val allClassTestsInOneFileStatDir = new File(allClassTestsInOneFileDir, "stat")
-if (allClassTestsInOneFileStatDir.exists) 
-  generateChartFile(allClassTestsInOneFileStatDir, new File(allClassTestsInOneFileDir, "allClassTestsInOneFile-graph.html"))
+val allMethodTestsInOneFile210Dir = new File("target/2.10/allMethodTestsInOneFile")
+val allMethodTestsInOneFile210StatDir = new File(allMethodTestsInOneFile210Dir, "stat")
+if (allMethodTestsInOneFile210StatDir.exists)
+  generateChartFile(allMethodTestsInOneFile210StatDir, new File(allMethodTestsInOneFile210Dir, "allMethodTestsInOneFile-graph.html"), SecondChart)
 else
-  println("allClassTestsInOneFile/stat directory does not exist, allClassTestsInOneFile/allClassTestsInOneFile-graph.html will not be generated.")
+  println("target/2.10/allMethodTestsInOneFile/stat directory does not exist, target/2.10/allMethodTestsInOneFile/allMethodTestsInOneFile-graph.html will not be generated.")
+  
+val allMethodTestsInOneFile211Dir = new File("target/2.11/allMethodTestsInOneFile")
+val allMethodTestsInOneFile211StatDir = new File(allMethodTestsInOneFile211Dir, "stat")
+if (allMethodTestsInOneFile211StatDir.exists)
+  generateChartFile(allMethodTestsInOneFile211StatDir, new File(allMethodTestsInOneFile211Dir, "allMethodTestsInOneFile-graph.html"), SecondChart)
+else
+  println("target/2.11/allMethodTestsInOneFile/stat directory does not exist, target/2.11/allMethodTestsInOneFile/allMethodTestsInOneFile-graph.html will not be generated.")
 
-val assertMacroDir = new File("assertMacro")
-val assertMacroStatDir = new File(assertMacroDir, "stat")
-if (assertMacroStatDir.exists) 
-  generateChartFile(assertMacroStatDir, new File(assertMacroDir, "assertMacro-graph.html"))
+val assertTestsInOneFile210Dir = new File("target/2.10/assertTestsInOneFile")
+val assertTestsInOneFile210StatDir = new File(assertTestsInOneFile210Dir, "stat")
+if (assertTestsInOneFile210StatDir.exists)
+  generateChartFile(assertTestsInOneFile210StatDir, new File(assertTestsInOneFile210Dir, "assertTestsInOneFile-graph.html"))
 else
-  println("assertMacro/stat directory does not exist, assertMacro/assertMacro-graph.html will not be generated.")
+  println("target/2.10/assertTestsInOneFile/stat directory does not exist, target/2.10/assertTestsInOneFile/assertTestsInOneFile-graph.html will not be generated.")
 
-val scalautilsScalazDir = new File("scalautilsScalaz")
-val scalautilsScalazStatDir = new File(scalautilsScalazDir, "stat")
-if (scalautilsScalazStatDir.exists)
-  generateChartFile(scalautilsScalazStatDir, new File(scalautilsScalazDir, "scalautilsScalaz-graph.html"))
+val assertTestsInOneFile211Dir = new File("target/2.11/assertTestsInOneFile")
+val assertTestsInOneFile211StatDir = new File(assertTestsInOneFile211Dir, "stat")
+if (assertTestsInOneFile211StatDir.exists)
+  generateChartFile(assertTestsInOneFile211StatDir, new File(assertTestsInOneFile211Dir, "assertTestsInOneFile-graph.html"))
 else
-  println("scalautilsScalaz/stat directory does not exist, scalautilsScalaz/scalautilsScalaz-graph.html will not be generated.")
+  println("target/2.11/assertTestsInOneFile/stat directory does not exist, target/2.11/assertTestsInOneFile/assertTestsInOneFile-graph.html will not be generated.")
+  
+val allClassTestsInOneFile210Dir = new File("target/2.10/allClassTestsInOneFile")
+val allClassTestsInOneFile210StatDir = new File(allClassTestsInOneFile210Dir, "stat")
+if (allClassTestsInOneFile210StatDir.exists) 
+  generateChartFile(allClassTestsInOneFile210StatDir, new File(allClassTestsInOneFile210Dir, "allClassTestsInOneFile-graph.html"))
+else
+  println("target/2.10/allClassTestsInOneFile/stat directory does not exist, target/2.10/allClassTestsInOneFile/allClassTestsInOneFile-graph.html will not be generated.")
 
-val shapelessTablesDir = new File("shapelessTables")
-val shapelessTablesStatDir = new File(shapelessTablesDir, "stat")
-if (shapelessTablesStatDir.exists)
-  generateChartFile(shapelessTablesStatDir, new File(shapelessTablesDir, "shapelessTables-graph.html"))
+val allClassTestsInOneFile211Dir = new File("target/2.11/allClassTestsInOneFile")
+val allClassTestsInOneFile211StatDir = new File(allClassTestsInOneFile211Dir, "stat")
+if (allClassTestsInOneFile211StatDir.exists) 
+  generateChartFile(allClassTestsInOneFile211StatDir, new File(allClassTestsInOneFile211Dir, "allClassTestsInOneFile-graph.html"))
 else
-  println("shapelessTables/stat directory does not exist, shapelessTables/shapelessTables-graph.html will not be generated.")
+  println("target/2.11/allClassTestsInOneFile/stat directory does not exist, target/2.11/allClassTestsInOneFile/allClassTestsInOneFile-graph.html will not be generated.")
+
+val assertMacro210Dir = new File("target/2.10/assertMacro")
+val assertMacro210StatDir = new File(assertMacro210Dir, "stat")
+if (assertMacro210StatDir.exists) 
+  generateChartFile(assertMacro210StatDir, new File(assertMacro210Dir, "assertMacro-graph.html"))
+else
+  println("target/2.10/assertMacro/stat directory does not exist, target/2.10/assertMacro/assertMacro-graph.html will not be generated.")
+
+val assertMacro211Dir = new File("target/2.11/assertMacro")
+val assertMacro211StatDir = new File(assertMacro211Dir, "stat")
+if (assertMacro211StatDir.exists) 
+  generateChartFile(assertMacro211StatDir, new File(assertMacro211Dir, "assertMacro-graph.html"))
+else
+  println("target/2.11/assertMacro/stat directory does not exist, target/2.11/assertMacro/assertMacro-graph.html will not be generated.")
+
+val scalautilsScalaz210Dir = new File("target/2.10/scalautilsScalaz")
+val scalautilsScalaz210StatDir = new File(scalautilsScalaz210Dir, "stat")
+if (scalautilsScalaz210StatDir.exists)
+  generateChartFile(scalautilsScalaz210StatDir, new File(scalautilsScalaz210Dir, "scalautilsScalaz-graph.html"))
+else
+  println("target/2.10/scalautilsScalaz/stat directory does not exist, target/2.10/scalautilsScalaz/scalautilsScalaz-graph.html will not be generated.")
+
+val scalautilsScalaz211Dir = new File("target/2.11/scalautilsScalaz")
+val scalautilsScalaz211StatDir = new File(scalautilsScalaz211Dir, "stat")
+if (scalautilsScalaz211StatDir.exists)
+  generateChartFile(scalautilsScalaz211StatDir, new File(scalautilsScalaz211Dir, "scalautilsScalaz-graph.html"))
+else
+  println("target/2.11/scalautilsScalaz/stat directory does not exist, target/2.11/scalautilsScalaz/scalautilsScalaz-graph.html will not be generated.")
+
+val shapelessTables210Dir = new File("target/2.10/shapelessTables")
+val shapelessTables210StatDir = new File(shapelessTables210Dir, "stat")
+if (shapelessTables210StatDir.exists)
+  generateChartFile(shapelessTables210StatDir, new File(shapelessTables210Dir, "shapelessTables-graph.html"))
+else
+  println("target/2.10/shapelessTables/stat directory does not exist, target/2.10/shapelessTables/shapelessTables-graph.html will not be generated.")
+
+val shapelessTables211Dir = new File("target/2.11/shapelessTables")
+val shapelessTables211StatDir = new File(shapelessTables211Dir, "stat")
+if (shapelessTables211StatDir.exists)
+  generateChartFile(shapelessTables211StatDir, new File(shapelessTables211Dir, "shapelessTables-graph.html"))
+else
+  println("target/2.11/shapelessTables/stat directory does not exist, target/2.11/shapelessTables/shapelessTables-graph.html will not be generated.")

@@ -3,8 +3,25 @@ import java.io._
 import java.nio.channels.Channels
 import scala.annotation.tailrec
 
-def scalaVersion = "2.10"
-val scalaTestVersion = "2.0"
+val scalaHome = {
+  val home = scala.util.Properties.scalaHome
+  println("Scala Home: " + home)
+  home
+}
+
+val scalaVersion = {
+  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
+  println("Detected Scala version: " + rawVersion)
+  val versionParts = rawVersion.split("\\.")
+  versionParts(0).toInt + "." + versionParts(1).toInt
+}
+val scalaTestVersion = "2.1.6"
+val shapelessVersion = "2.0.0"
+val shapelessScalaVersion = 
+  if (scalaVersion == "2.11")
+    scalaVersion
+  else
+    scala.util.Properties.scalaPropOrElse("version.number", "unknown")
 
 def downloadFile(urlString: String, targetFile: File) {
   println("Downloading " + urlString)
@@ -128,7 +145,7 @@ def generateShapelessSourceFile(testCount: Int, targetDir: File): File = {
 def compile(srcFile: String, classpath: String, targetDir: String) = {
   import scala.collection.JavaConversions._
 
-  val command = List("scalac", "-classpath", classpath, "-d", targetDir, srcFile)
+  val command = List(scalaHome + "/bin/scalac", "-classpath", classpath, "-d", targetDir, srcFile)
   val builder = new ProcessBuilder(command)
   builder.redirectErrorStream(true)
   val start = System.currentTimeMillis
@@ -208,11 +225,11 @@ val scalatestJar = new File("scalatest_" + scalaVersion + "-" + scalaTestVersion
 if (!scalatestJar.exists)
   downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest_" + scalaVersion + "/" + scalaTestVersion + "/scalatest_" + scalaVersion + "-" + scalaTestVersion + ".jar", scalatestJar)
 
-val shapelessJar = new File("shapeless_2.10.2-2.0.0.jar")
+val shapelessJar = new File("shapeless_" + scalaVersion + "-" + shapelessVersion + ".jar")
 if (!shapelessJar.exists)
-  downloadFile("http://oss.sonatype.org/content/repositories/releases/com/chuusai/shapeless_2.10.2/2.0.0/shapeless_2.10.2-2.0.0.jar", shapelessJar)
+  downloadFile("http://oss.sonatype.org/content/repositories/releases/com/chuusai/shapeless_" + shapelessScalaVersion + "/" + shapelessVersion + "/shapeless_" + shapelessScalaVersion + "-" + shapelessVersion + ".jar", shapelessJar)
 
-val baseDir = new File("shapelessTables")
+val baseDir = new File("target/" + scalaVersion + "/shapelessTables")
 if (baseDir.exists)
   deleteDir(baseDir)
 

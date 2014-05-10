@@ -4,16 +4,18 @@ import java.nio.channels.Channels
 import scala.annotation.tailrec
 import scala.math.pow
 
-/*
-def scalaVersion = {
-  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
-  if (rawVersion.endsWith(".final"))
-    rawVersion.substring(0, rawVersion.length - 6)
-  else
-    rawVersion
+val scalaHome = {
+  val home = scala.util.Properties.scalaHome
+  println("Scala Home: " + home)
+  home
 }
-*/
-def scalaVersion = "2.10"
+
+val scalaVersion = {
+  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
+  println("Detected Scala version: " + rawVersion)
+  val versionParts = rawVersion.split("\\.")
+  versionParts(0).toInt + "." + versionParts(1).toInt
+}
 val scalaTestVersion = "2.1.6"
 val specs2Version = "2.3.11"
 val scalazVersion = "7.0.6"
@@ -181,7 +183,7 @@ def generateMultipleSpecs2Immutable(testCount: Int, targetDir: File): List[Strin
 def compile(srcFiles: List[String], classpath: String, targetDir: String) = {
   import scala.collection.JavaConversions._
   
-  val command = List("scalac", "-classpath", classpath, "-d", targetDir) ::: srcFiles
+  val command = List(scalaHome + "/bin/scalac", "-classpath", classpath, "-d", targetDir) ::: srcFiles
   val builder = new ProcessBuilder(command)
   builder.redirectErrorStream(true)
   val start = System.currentTimeMillis
@@ -253,7 +255,7 @@ if (scalaVersion != "unknown") {
   if (!specs2ScalazJar.exists)
     downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalaz/scalaz-core_" + scalaVersion + "/" + scalazVersion + "/scalaz-core_" + scalaVersion + "-" + scalazVersion + ".jar", specs2ScalazJar)
 
-  val baseDir = new File("testsIn100Files")
+  val baseDir = new File("target/" + scalaVersion + "/testsIn100Files")
   if (baseDir.exists)
     deleteDir(baseDir)
     

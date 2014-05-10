@@ -3,7 +3,18 @@ import java.io._
 import java.nio.channels.Channels
 import scala.annotation.tailrec
 
-def scalaVersion = "2.10"
+val scalaHome = {
+  val home = scala.util.Properties.scalaHome
+  println("Scala Home: " + home)
+  home
+}
+
+val scalaVersion = {
+  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
+  println("Detected Scala version: " + rawVersion)
+  val versionParts = rawVersion.split("\\.")
+  versionParts(0).toInt + "." + versionParts(1).toInt
+}
 val scalautilsVersion = "2.1.6"
 val scalazVersion = "7.0.6"
 
@@ -47,7 +58,7 @@ def equalFun(x: Int): String = x + " + 1 === " + (x+1)
 def compile(srcFile: String, classpath: String, targetDir: String) = {
   import scala.collection.JavaConversions._
 
-  val command = List("scalac", "-classpath", classpath, "-d", targetDir, srcFile)
+  val command = List(scalaHome + "/bin/scalac", "-classpath", classpath, "-d", targetDir, srcFile)
   val builder = new ProcessBuilder(command)
   builder.redirectErrorStream(true)
   val start = System.currentTimeMillis
@@ -110,7 +121,7 @@ val scalazJar = new File("scalaz-core_" + scalaVersion + "-" + scalazVersion + "
 if (!scalazJar.exists)
   downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalaz/scalaz-core_" + scalaVersion + "/" + scalazVersion + "/scalaz-core_" + scalaVersion + "-" + scalazVersion + ".jar", scalazJar)
 
-val baseDir = new File("scalautilsScalaz")
+val baseDir = new File("target/" + scalaVersion + "/scalautilsScalaz")
 if (baseDir.exists)
   deleteDir(baseDir)
 

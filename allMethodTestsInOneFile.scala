@@ -4,15 +4,18 @@ import java.nio.channels.Channels
 import scala.annotation.tailrec
 import scala.math.pow
 
-/*def scalaVersion = {
-  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
-  if (rawVersion.endsWith(".final"))
-    rawVersion.substring(0, rawVersion.length - 6)
-  else
-    rawVersion
-}*/
+val scalaHome = {
+  val home = scala.util.Properties.scalaHome
+  println("Scala Home: " + home)
+  home
+}
 
-def scalaVersion = "2.10"
+val scalaVersion = {
+  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
+  println("Detected Scala version: " + rawVersion)
+  val versionParts = rawVersion.split("\\.")
+  versionParts(0).toInt + "." + versionParts(1).toInt
+}
 val scalaTestVersion = "2.1.6"
 val junitVersion = "4.11"  // JUnit depends on hamcrestVersion
 val hamcrestVersion = "1.3"
@@ -89,7 +92,7 @@ def specs2MutableTestDefFun(x: Int): String = "\"increment " + x + "\" in"
 def compile(srcFile: String, classpath: String, targetDir: String) = {
   import scala.collection.JavaConversions._
 
-  val command = List("scalac", "-classpath", classpath, "-d", targetDir, srcFile)
+  val command = List(scalaHome + "/bin/scalac", "-classpath", classpath, "-d", targetDir, srcFile)
   val builder = new ProcessBuilder(command)
   builder.redirectErrorStream(true)
   val start = System.currentTimeMillis
@@ -174,7 +177,7 @@ if (scalaVersion != "unknown") {
   if (!testngJar.exists)
     downloadFile("http://repo1.maven.org/maven2/org/testng/testng/" + testngVersion + "/testng-" + testngVersion + ".jar", testngJar)
     
-  val baseDir = new File("allMethodTestsInOneFile")
+  val baseDir = new File("target/" + scalaVersion + "/allMethodTestsInOneFile")
   if (baseDir.exists)
     deleteDir(baseDir)
     

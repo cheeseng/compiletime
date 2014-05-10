@@ -4,19 +4,27 @@ import java.nio.channels.Channels
 import scala.annotation.tailrec
 import scala.math.pow
 
-/*
-def scalaVersion = {
-  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
-  if (rawVersion.endsWith(".final"))
-    rawVersion.substring(0, rawVersion.length - 6)
-  else
-    rawVersion
+val scalaHome = {
+  val home = scala.util.Properties.scalaHome
+  println("Scala Home: " + home)
+  home
 }
-*/
-def scalaVersion = "2.10"
-val scalaTestVersion = "2.0"
-val specs2Version = "2.3.4"
-val scalazVersion = "7.0.4"
+
+val scalaVersion = {
+  val rawVersion = scala.util.Properties.scalaPropOrElse("version.number", "unknown")
+  println("Detected Scala version: " + rawVersion)
+  val versionParts = rawVersion.split("\\.")
+  versionParts(0).toInt + "." + versionParts(1).toInt
+}
+val scalaTestVersion = "2.1.6"
+val specs2Version = "2.3.11"
+val scalazVersion = "7.0.6"
+val shapelessVersion = "2.0.0"
+val shapelessScalaVersion = 
+  if (scalaVersion == "2.11")
+    scalaVersion
+  else
+    scala.util.Properties.scalaPropOrElse("version.number", "unknown")
 
 def downloadFile(urlString: String, targetFile: File) {
   println("Downloading " + urlString)
@@ -190,7 +198,7 @@ def generateSpecs2Mutable(testCount: Int, targetDir: File): File = {
 def compile(srcFile: String, classpath: String, targetDir: String) = {
   import scala.collection.JavaConversions._
 
-  val command = List("scalac", "-classpath", classpath, "-d", targetDir, srcFile)
+  val command = List(scalaHome + "/bin/scalac", "-classpath", classpath, "-d", targetDir, srcFile)
   val builder = new ProcessBuilder(command)
   builder.redirectErrorStream(true)
   val start = System.currentTimeMillis
@@ -279,11 +287,11 @@ if (scalaVersion != "unknown") {
   if (!specs2ScalazJar.exists)
     downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalaz/scalaz-core_" + scalaVersion + "/" + scalazVersion + "/scalaz-core_" + scalaVersion + "-" + scalazVersion + ".jar", specs2ScalazJar)
 
-  val shapelessJar = new File("shapeless_2.10.2-2.0.0-SNAPSHOT.jar")
+  val shapelessJar = new File("shapeless_" + scalaVersion + "-" + shapelessVersion + ".jar")
   if (!shapelessJar.exists)
-    downloadFile("http://oss.sonatype.org/content/repositories/snapshots/com/chuusai/shapeless_2.10.2/2.0.0-SNAPSHOT/shapeless_2.10.2-2.0.0-SNAPSHOT.jar", shapelessJar)
+    downloadFile("http://oss.sonatype.org/content/repositories/releases/com/chuusai/shapeless_" + shapelessScalaVersion + "/" + shapelessVersion + "/shapeless_" + shapelessScalaVersion + "-" + shapelessVersion + ".jar", shapelessJar)
 
-  val baseDir = new File("dataTables")
+  val baseDir = new File("target/" + scalaVersion + "/dataTables")
   if (baseDir.exists)
     deleteDir(baseDir)
 
