@@ -274,3 +274,10 @@ if (shapelessTables211StatDir.exists)
   generateChartFile(shapelessTables211StatDir, new File(shapelessTables211Dir, "shapelessTables-graph.html"))
 else
   println("target/2.11/shapelessTables/stat directory does not exist, target/2.11/shapelessTables/shapelessTables-graph.html will not be generated.")
+
+val scalatest3211Dir = new File("target/2.11/scalatest3")
+val scalatest3211StatDir = new File(scalatest3211Dir, "stat")
+if (scalatest3211StatDir.exists)
+  generateChartFile(scalatest3211StatDir, new File(scalatest3211Dir, "scalatest3-graph.html"))
+else
+  println("target/2.11/scalatest3/stat directory does not exist, target/2.11/scalatest3/scalatest3-graph.html will not be generated.")
