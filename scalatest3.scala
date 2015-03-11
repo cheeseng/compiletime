@@ -92,8 +92,10 @@ def generateMultipleSourceFiles(testCount: Int, maxTestCount:Int, targetDir: Fil
 def assert2TestBodyFun(x: Int): String = "assert(" + x + " + 1 == " + (x+1) + ")"
 // Using assert(===)
 def assert3TestBodyFun(x: Int): String = "assert(" + x + " + 1 === " + (x+1) + ")"
-// Using should matchers
+// Using should equal matchers
 def shouldEqualTestBodyFun(x: Int): String = x + " + 1 should equal (" + (x+1) + ")"
+// Using should be matchers
+def shouldBeTestBodyFun(x: Int): String = x + " + 1 should be (" + (x+1) + ")"
 
 // Spec 
 def specTestDefFun(x: Int): String = "def `increment " + x + "`"
@@ -201,12 +203,13 @@ if (scalaVersion != "unknown") {
 
   val scalatest2Styles = 
     Array( 
-      Style("scalatest2Equal", "WordSpec", true, "\"Scala\" can ", wordSpecTestDefFun)
+      Style("scalatest2", "WordSpec", true, "\"Scala\" can ", wordSpecTestDefFun)
     )
 
   val scalatest2TestTypes = 
     Array(
-      TestType("with Matchers", "Matchers", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun)
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldBeTestBodyFun)
       //TestType("assert ===", "Assert3", Array("org.scalatest._"), Array.empty, assert3TestBodyFun)
       
       /*TestType("Default", "Matchers", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun), 
@@ -217,12 +220,13 @@ if (scalaVersion != "unknown") {
 
   val scalatest3Styles = 
     Array( 
-      Style("scalatest3Equal", "WordSpec", true, "\"Scala\" can ", wordSpecTestDefFun)
+      Style("scalatest3", "WordSpec", true, "\"Scala\" can ", wordSpecTestDefFun)
     )
 
   val scalatest3TestTypes = 
     Array(
-      TestType("with Matchers", "Matchers", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun)
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun)
       //TestType("assert ===", "Assert3", Array("org.scalatest._"), Array.empty, assert3TestBodyFun)
       
       /*TestType("Default", "Matchers", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun),
@@ -265,11 +269,11 @@ if (scalaVersion != "unknown") {
   scalatest2Styles.foreach { style =>
     scalatest2TestTypes.foreach { testType => 
       try {
-        durationFile.write(style.name) // Don't write with MustMatchers to get all 4 names to fit on graph
+        durationFile.write(style.name + "-" + testType.shortName) // Don't write with MustMatchers to get all 4 names to fit on graph
         durationFile.flush()
-        fileCountFile.write(style.name)
+        fileCountFile.write(style.name + "-" + testType.shortName)
         fileCountFile.flush()
-        fileSizeFile.write(style.name)
+        fileSizeFile.write(style.name + "-" + testType.shortName)
         fileSizeFile.flush()
         testCounts.foreach { testCount =>
           println("Working on " + style.className +" " + testType.name + " test count " + testCount + "...")
@@ -319,11 +323,11 @@ if (scalaVersion != "unknown") {
   scalatest3Styles.foreach { style =>
     scalatest3TestTypes.foreach { testType => 
       try {
-        durationFile.write(style.name) // Don't write with MustMatchers to get all 4 names to fit on graph
+        durationFile.write(style.name + "-" + testType.shortName) // Don't write with MustMatchers to get all 4 names to fit on graph
         durationFile.flush()
-        fileCountFile.write(style.name)
+        fileCountFile.write(style.name + "-" + testType.shortName)
         fileCountFile.flush()
-        fileSizeFile.write(style.name)
+        fileSizeFile.write(style.name + "-" + testType.shortName)
         fileSizeFile.flush()
         testCounts.foreach { testCount =>
           println("Working on " + style.className +" " + testType.name + " test count " + testCount + "...")
