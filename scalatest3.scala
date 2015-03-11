@@ -16,8 +16,8 @@ val scalaVersion = {
   val versionParts = rawVersion.split("\\.")
   versionParts(0).toInt + "." + versionParts(1).toInt
 }
-val scalaTest2Version = "2.3.0-SNAP2"
-val scalaTest3Version = "3.0.0-SNAP4"
+val scalaTest2Version = "2.3.0-SNAP3"
+val scalaTest3Version = "3.0.0-SNAP5"
 
 def downloadFile(urlString: String, targetFile: File) {
   println("Downloading " + urlString)
@@ -175,13 +175,13 @@ case class Style(name: String, className: String, scopeBracket: Boolean, scopeDe
 case class TestType(name: String, shortName: String, importNames: Array[String], mixinNames: Array[String], testBodyFun: (Int) => String)
 
 if (scalaVersion != "unknown") {
-  val scalatest2Jar = new File("scalatest_" + scalaVersion + "-" + scalaTest2Version + ".jar")
+  val scalatest2Jar = new File("scalatest-all_" + scalaVersion + "-" + scalaTest2Version + ".jar")
   if (!scalatest2Jar.exists)
-    downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest_" + scalaVersion + "/" + scalaTest2Version + "/scalatest_" + scalaVersion + "-" + scalaTest2Version + ".jar", scalatest2Jar)
+    downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest-all_" + scalaVersion + "/" + scalaTest2Version + "/scalatest-all_" + scalaVersion + "-" + scalaTest2Version + ".jar", scalatest2Jar)
 
-  val scalatest3Jar = new File("scalatest_" + scalaVersion + "-" + scalaTest3Version + ".jar")
+  val scalatest3Jar = new File("scalatest-all_" + scalaVersion + "-" + scalaTest3Version + ".jar")
   if (!scalatest3Jar.exists)
-    downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest_" + scalaVersion + "/" + scalaTest3Version + "/scalatest_" + scalaVersion + "-" + scalaTest3Version + ".jar", scalatest3Jar)
+    downloadFile("https://oss.sonatype.org/content/repositories/releases/org/scalatest/scalatest-all_" + scalaVersion + "/" + scalaTest3Version + "/scalatest-all_" + scalaVersion + "-" + scalaTest3Version + ".jar", scalatest3Jar)
 
   val baseDir = new File("target/" + scalaVersion + "/scalatest3")
   if (baseDir.exists)
