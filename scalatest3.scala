@@ -98,6 +98,12 @@ def shouldEqualTestBodyFun(x: Int): String = x + " + 1 should equal (" + (x+1) +
 def shouldBeTestBodyFun(x: Int): String = x + " + 1 should be (" + (x+1) + ")"
 // Using should be matchers
 def shouldContainTestBodyFun(x: Int): String = "List(" + x + " + 1) should contain (" + (x+1) + ")"
+// Using should equal matchers with logical and
+def shouldLogicalAndEqualTestBodyFun(x: Int): String = x + " + 1 should (not equal " + x + " and not equal " + (x-1) + ")"
+// Using should be matchers with logical and
+def shouldLogicalAndBeTestBodyFun(x: Int): String = x + " + 1 should (not be " + x + " and not be " + (x-1) + ")"
+// Using should contain matchers with logical and
+def shouldLogicalAndContainTestBodyFun(x: Int): String = "List(" + x + " + 1) should (not contain " + x + " and not contain " + (x-1) + ")"
 
 // Spec 
 def specTestDefFun(x: Int): String = "def `increment " + x + "`"
@@ -211,8 +217,17 @@ if (scalaVersion != "unknown") {
   val scalatest2TestTypes = 
     Array(
       TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun), 
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldEqualTestBodyFun), 
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndEqualTestBodyFun), 
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldLogicalAndEqualTestBodyFun), 
       TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldBeTestBodyFun), 
-      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldContainTestBodyFun)
+      TestType("be", "be", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldBeTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndBeTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldLogicalAndBeTestBodyFun),  
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._", "org.scalactic.TypeCheckedTripleEquals._"), Array.empty, shouldLogicalAndContainTestBodyFun) 
     )
 
   val scalatest3Styles = 
@@ -223,8 +238,17 @@ if (scalaVersion != "unknown") {
   val scalatest3TestTypes = 
     Array(
       TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldEqualTestBodyFun), 
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldEqualTestBodyFun),
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndEqualTestBodyFun), 
+      TestType("equal", "equals", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldLogicalAndEqualTestBodyFun), 
       TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldBeTestBodyFun), 
-      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldContainTestBodyFun)
+      TestType("be", "be", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldBeTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndBeTestBodyFun), 
+      TestType("be", "be", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldLogicalAndBeTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._"), Array.empty, shouldLogicalAndContainTestBodyFun), 
+      TestType("contain", "contain", Array("org.scalatest._", "Matchers._", "org.scalactic.CheckedEquality._"), Array.empty, shouldLogicalAndContainTestBodyFun)
     )
 
   val testCounts = 
