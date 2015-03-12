@@ -281,3 +281,10 @@ if (scalatest3211StatDir.exists)
   generateChartFile(scalatest3211StatDir, new File(scalatest3211Dir, "scalatest3-graph.html"))
 else
   println("target/2.11/scalatest3/stat directory does not exist, target/2.11/scalatest3/scalatest3-graph.html will not be generated.")
+
+val supersafe211Dir = new File("target/2.11/supersafe")
+val supersafe211StatDir = new File(supersafe211Dir, "stat")
+if (supersafe211StatDir.exists)
+  generateChartFile(supersafe211StatDir, new File(supersafe211Dir, "supersafe-graph.html"))
+else
+  println("target/2.11/supersafe/stat directory does not exist, target/2.11/supersafe/supersafe-graph.html will not be generated.")
