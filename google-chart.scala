@@ -288,3 +288,31 @@ if (supersafe211StatDir.exists)
   generateChartFile(supersafe211StatDir, new File(supersafe211Dir, "supersafe-graph.html"))
 else
   println("target/2.11/supersafe/stat directory does not exist, target/2.11/supersafe/supersafe-graph.html will not be generated.")
+
+val assertBeforeAfter210Dir = new File("target/2.10/assertBeforeAfter")
+val assertBeforeAfter210StatDir = new File(assertBeforeAfter210Dir, "stat")
+if (assertBeforeAfter210StatDir.exists) 
+  generateChartFile(assertBeforeAfter210StatDir, new File(assertBeforeAfter210Dir, "assertBeforeAfter-graph.html"))
+else
+  println("target/2.10/assertBeforeAfter/stat directory does not exist, target/2.10/assertBeforeAfter/assertBeforeAfter-graph.html will not be generated.")
+
+val assertBeforeAfter211Dir = new File("target/2.11/assertBeforeAfter")
+val assertBeforeAfter211StatDir = new File(assertBeforeAfter211Dir, "stat")
+if (assertBeforeAfter211StatDir.exists) 
+  generateChartFile(assertBeforeAfter211StatDir, new File(assertBeforeAfter211Dir, "assertBeforeAfter-graph.html"))
+else
+  println("target/2.11/assertBeforeAfter/stat directory does not exist, target/2.11/assertBeforeAfter/assertBeforeAfter-graph.html will not be generated.")
+
+val matcherBeforeAfter210Dir = new File("target/2.10/matcherBeforeAfter")
+val matcherBeforeAfter210StatDir = new File(matcherBeforeAfter210Dir, "stat")
+if (matcherBeforeAfter210StatDir.exists) 
+  generateChartFile(matcherBeforeAfter210StatDir, new File(matcherBeforeAfter210Dir, "matcherBeforeAfter-graph.html"))
+else
+  println("target/2.10/matcherBeforeAfter/stat directory does not exist, target/2.10/matcherBeforeAfter/matcherBeforeAfter-graph.html will not be generated.")
+
+val matcherBeforeAfter211Dir = new File("target/2.11/matcherBeforeAfter")
+val matcherBeforeAfter211StatDir = new File(matcherBeforeAfter211Dir, "stat")
+if (matcherBeforeAfter211StatDir.exists) 
+  generateChartFile(matcherBeforeAfter211StatDir, new File(matcherBeforeAfter211Dir, "matcherBeforeAfter-graph.html"))
+else
+  println("target/2.11/matcherBeforeAfter/stat directory does not exist, target/2.11/matcherBeforeAfter/matcherBeforeAfter-graph.html will not be generated.")

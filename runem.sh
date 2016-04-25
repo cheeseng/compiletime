@@ -21,4 +21,8 @@ $SCALA_210/bin/scala scalautilsScalaz.scala
 $SCALA_211/bin/scala scalautilsScalaz.scala
 $SCALA_210/bin/scala shapelessTables.scala
 $SCALA_211/bin/scala shapelessTables.scala
+$SCALA_210/bin/scala assertBeforeAfter.scala
+$SCALA_211/bin/scala assertBeforeAfter.scala
+$SCALA_210/bin/scala matcherBeforeAfter.scala
+$SCALA_211/bin/scala matcherBeforeAfter.scala
 $SCALA_210/bin/scala google-chart.scala
