@@ -204,3 +204,10 @@ if (shapelessTablesStatDir.exists)
   generateChartFile(shapelessTablesStatDir, new File(shapelessTablesDir, "shapelessTables-graph.html"))
 else
   println("shapelessTables/stat directory does not exist, shapelessTables/shapelessTables-graph.html will not be generated.")
+
+val funsuiteModuleDir = new File("funsuiteModule")
+val funsuiteModuleStatDir = new File(funsuiteModuleDir, "stat")
+if (funsuiteModuleStatDir.exists)
+  generateChartFile(funsuiteModuleStatDir, new File(funsuiteModuleDir, "funsuiteModule-graph.html"))
+else
+  println("funsuiteModule/stat directory does not exist, funsuiteModule/funsuiteModule-graph.html will not be generated.")
